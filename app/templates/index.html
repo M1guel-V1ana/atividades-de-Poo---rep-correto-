@@ -7,43 +7,47 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="container">
 
-    <h1>Lista de Compras</h1>
-    <form method="post" action="{{ url_for('add_task') }}">
-        <input type="text" name="title" placeholder="Digite um item a sua lista">
-        <button type="submit">Adicionar a lista de compras</button>
-    </form>
+        <h1>Lista de Compras</h1>
 
-    <hr>
+        <form method="post" action="{{ url_for('add_task') }}">
+            <input type="text" name="title" placeholder="Adicionar um item">
+            <button type="submit">Adicionar</button>
+        </form>
 
-    {% if tasks|length == 0 %}
-        <p>Nenhum item cadastrado a sua lista de compras.</p>
-    {% else %}
-        <ul>
-            {% for t in tasks %}
-                <li>
-                    {% if t.done %}
-                        <s>{{ t.title }}</s>
-                    {% else %}
-                        {{ t.title }}
-                    {% endif %}
+        <hr>
 
-                    <form style="display:inline"
-                          method="post"
-                          action="{{ url_for('toggle_task', task_id=t.id) }}">
-                        <button type="submit">✓</button>
-                    </form>
+        {% if tasks|length == 0 %}
+            <p>Nenhum item cadastrado a sua lista de compras.</p>
+        {% else %}
+            <ul>
+                {% for t in tasks %}
+                    <li>
 
+                        {% if t.done %}
+                            <s>{{ t.title }}</s>
+                        {% else %}
+                            <span class="item-text">{{ t.title }}</span>
+                        {% endif %}
 
-                    <form style="display:inline"
-                          method="post"
-                          action="{{ url_for('delete_task', task_id=t.id) }}">
-                        <button type="submit">remover item</button>
-                    </form>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+                        <div class="actions">
+                            <form method="post"
+                                  action="{{ url_for('toggle_task', task_id=t.id) }}">
+                                <button type="submit" class="btn-check">✓</button>
+                            </form>
+
+                            <form method="post"
+                                  action="{{ url_for('delete_task', task_id=t.id) }}">
+                                <button type="submit" class="btn-delete">Remover</button>
+                            </form>
+                        </div>
+
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+</div>
 
 </body>
 </html>
