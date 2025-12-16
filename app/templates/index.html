@@ -2,22 +2,22 @@
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
-    <title>To-do Flask</title>
+    <title>Compras do mercado</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <h1>To-do com Flask</h1>
+    <h1>Lista de Compras</h1>
     <form method="post" action="{{ url_for('add_task') }}">
-        <input type="text" name="title" placeholder="Digite uma tarefa">
+        <input type="text" name="title" placeholder="Digite um item a sua lista">
         <button type="submit">Adicionar a lista de compras</button>
     </form>
 
     <hr>
 
     {% if tasks|length == 0 %}
-        <p>Nenhum item cadastrado a sua lista.</p>
+        <p>Nenhum item cadastrado a sua lista de compras.</p>
     {% else %}
         <ul>
             {% for t in tasks %}
