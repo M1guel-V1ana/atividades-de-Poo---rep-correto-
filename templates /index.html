@@ -1,0 +1,49 @@
+<!doctyp html>
+<html lang = "pt-br">
+<head>
+    <meta charset="utf-8">
+    <title> Atividade Flask</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>   
+<body>
+    <h1>To-do com Flask</h1>
+    <form method="post" action="{{ url_for('add_task') }}">
+        <input type="text" name="title" placeholder="Adicione um produto a lista:">
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <hr>
+    {% if tasks|length == 0 %}
+        <p>Nenhuma tarefa cadastrada.</p>
+    {% else %}
+        <ul>
+            {%for t in tasks %}
+                <li>
+                    {% if t.done %}
+                        <s>{{ t.title }}</s>
+                    {% else %}
+                        {{t.title}}
+                    {% endif %}
+
+                    <form style="..."
+                        method="post"
+                        action="{{ url_for('togle_task', task_id=t.id) }}">
+                        <button> type="submit"<item adcionado></button>
+                    </form>
+
+
+                    <form style="..."
+                        method="post"
+                        action="{{ url_for('delet_task', task_id=t.id) }}">
+                        <button type="submit">remover item da lista</button>
+                    </form>
+                <li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</body>
+</html>
+
+
+
